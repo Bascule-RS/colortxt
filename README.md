@@ -1,7 +1,7 @@
 # colortxt
 A **training exercice** for React Native.
 
-displays a decomposed colored character screen from a string
+displays a decomposed colored characters screen from a string
 
 Devlopped with npm and expo.
 
