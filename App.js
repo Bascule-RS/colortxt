@@ -52,42 +52,34 @@ function Display({navigation, route}) {
     console.log("Arrivée de la saisie dans Display :" + saisie);
 
     function ReturnLambdaHex() {
-        let premier = Math.floor(Math.random() * (255 + 1));
-        let deuxieme = Math.floor(Math.random() * (255 + 1));
-        let troisieme = Math.floor(Math.random() * (255 + 1));
-        let quatrieme = Math.floor(Math.random() * (255 + 1));
-        let cinquieme = Math.floor(Math.random() * (255 + 1));
-        let sixieme = Math.floor(Math.random() * (255 + 1));
-       // console.log("La couleur de la lettre est :#" + premier.toString(16) + deuxieme.toString(16) + troisieme.toString(16));
+
         return {
-            color: "#" + premier.toString(16) + deuxieme.toString(16) + troisieme.toString(16),
-            backgroundColor: "#" + quatrieme.toString(16) + cinquieme.toString(16) + sixieme.toString(16),
+            color: "#" + Math.floor(Math.random() * (255 + 1)).toString(16) + Math.floor(Math.random() * (255 + 1)).toString(16) + Math.floor(Math.random() * (255 + 1)).toString(16),
+            backgroundColor: "#" + Math.floor(Math.random() * (255 + 1)).toString(16) + Math.floor(Math.random() * (255 + 1)).toString(16) + Math.floor(Math.random() * (255 + 1)).toString(16),
             flexDirection:'row', flexWrap:'wrap'
         }
     }
 
 
-    function Traitement({saisie}) {
-        console.log("saisie dans traitement " + saisie);
-        var array =  Array.from(Array(100).keys()); //build an array of 100 numbers
-  return array.map(() => ( DivideChaine(saisie)))
-
-    }
 
     function PrintCharColor(char) {
-       // console.log("dans PrintCharcolor Le caractère est" + char);
+      // console.log("dans PrintCharcolor les clés de l'objet sont" + Object.keys(char));
+       // console.log("dans PrintCharcolor Le char.char est" + char.charactere);
         return (
-            <Text style ={ReturnLambdaHex()}> {char}</Text> //Here the hex color style is calculated
+            <Text style={ReturnLambdaHex()} > {char.charactere}</Text> //Here the hex color style is calculated
                                                             //using the function
         );
 
     }
 
-    function DivideChaine(chaine) {
-       // console.log("Transmission de la saisie dans DivideChaine :" + chaine+ ".");
-        const tableauChaine = chaine.split(''); //division of the string in an array of char
-        return tableauChaine.map((char, index) => (<Text key={index} style={{flexDirection:'row', flexWrap:'wrap'}}>
-            {PrintCharColor(char)} </Text>));
+
+    function Traitement({saisie}) {
+        console.log("saisie dans traitement " + saisie);
+        const tableauChaine = saisie.split('');
+        var array =  Array.from(Array(100).keys()); //build an array of 100 numbers
+        return array.map(() => ( tableauChaine.map((char, key) => (
+            <PrintCharColor key={key} charactere ={char} />))));
+
     }
 
     return (// the component traitement is a chain of functions
